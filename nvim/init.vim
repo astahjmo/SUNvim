@@ -6,7 +6,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} "Autocomplete
 Plug 'neovim/nvim-lspconfig' "LPS https://www.jakewiesler.com/blog/getting-started-with-vim
 Plug 'nvim-lua/plenary.nvim' "Dependênci do Telescope
 Plug 'nvim-telescope/telescope.nvim' "Localiza arquivos
-Plug 'wakatime/vim-wakatime' "WakaTime
+" Plug 'wakatime/vim-wakatime' "WakaTime
 Plug 'vim-airline/vim-airline' "barra inferior
 Plug 'vim-airline/vim-airline-themes' "temas da barra inferior
 Plug 'navarasu/onedark.nvim' "one dark mode
@@ -51,9 +51,12 @@ augroup END
 noremap <silent> ; :<C-B>silent <C-E>s/^/<C-R>=escape(b:comment_leader,'\/')<CR>/<CR>:nohlsearch<CR>
 noremap <silent> . :<C-B>silent <C-E>s/^\V<C-R>=escape(b:comment_leader,'\/')<CR>//e<CR>:nohlsearch<CR>
 
-"Add/remove Tab em blocks de cídigo
+"Add/remove Tab em blocks de código
 vmap <Tab> >gv
 vmap <S-Tab> <gv 
+
+" Deleta as linhas selecionadas
+vnoremap <BS> d
 
 " VSCode features///////////////////////////////////////////////////////////////////////////////////////////////////////////
 " Select all
@@ -61,9 +64,6 @@ map <C-a> ggVG
 
 " Cut
 map <C-x> c
-
-" Redo
-"map <C-r> :redo<CR>
 
 " Desfaz linha por linha qundo usa U
 "inoremap <silent> <cr> <c-z>u<cr>
@@ -101,9 +101,32 @@ vnoremap <S-up> <ESC>yyp :m .-1<CR>gv=gv
 " Git
 nnoremap <C-g> :FloatermNew lazygit<CR>
 
-" Mapping
-map <C-A-n> <ESC>:w<CR>:FloatermNew --autoclose=0 gcc % -o %< && ./%<<CR>
+" Mapping terminal
 map <C-t> :FloatermNew<CR>
+" map <C-A-n> <ESC>:w<CR>:FloatermNew --autoclose=0 gcc % -o %< && ./%<<CR>
+
+" Run Code FloatermNew por Fábio Berbert de Paula em Viva ao Linux
+function! Executar_float(arq)
+    :w
+
+    if &filetype == 'html'
+        :terminal live-server .
+    elseif &filetype == 'js'
+        :terminal live-server .
+    elseif &filetype == 'css'
+        :terminal live-server .
+    elseif &filetype == 'python'
+        :FloatermNew --autoclose=0 python3 % -o %<
+    elseif &filetype == 'c'
+        :FloatermNew --autoclose=0 gcc % -o %< && ./%< 
+    elseif &filetype == 'rust'
+        :FloatermNew --autoclose=0 rustc % -o %< && ./%< 
+    endif
+endfunction
+nnoremap <F5> :call Executar_float(shellescape(@%, 1))<CR>
+
+" Terminal
+noremap <A-m> <ESC>:split<CR>:resize -9<CR>:set nonumber<CR>:terminal<CR>
 
 " Save
 inoremap <C-s> <C-O>:w<CR>
