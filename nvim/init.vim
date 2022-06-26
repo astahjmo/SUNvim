@@ -110,23 +110,23 @@ function! Executar_float(arq)
     :w
 
     if &filetype == 'html'
-        :terminal live-server .
+        :terminal live-server % -o
     elseif &filetype == 'js'
-        :terminal live-server .
+        :terminal live-server index.html
     elseif &filetype == 'css'
-        :terminal live-server .
+        :terminal live-server index.html
     elseif &filetype == 'python'
-        :FloatermNew --autoclose=0 python3 % -o %<
+        :FloatermNew --autoclose=0 python % -o
     elseif &filetype == 'c'
-        :FloatermNew --autoclose=0 gcc % -o %< && ./%< 
+        :FloatermNew --autoclose=0 gcc % -o %< && %< 
     elseif &filetype == 'rust'
-        :FloatermNew --autoclose=0 rustc % -o %< && ./%< 
+        :FloatermNew --autoclose=0 rustc % -o %< && %< 
     endif
 endfunction
 nnoremap <F5> :call Executar_float(shellescape(@%, 1))<CR>
 
 " Terminal
-noremap <A-m> <ESC>:split<CR>:resize -9<CR>:set nonumber<CR>:terminal<CR>
+noremap <A-m> <ESC>:split<CR>:resize -9<CR>:set nonumber<CR>:terminal powershell<CR>
 
 " Save
 inoremap <C-s> <C-O>:w<CR>
