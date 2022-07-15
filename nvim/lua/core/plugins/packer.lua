@@ -10,7 +10,7 @@ M.init = function ()
 		print("Starting core PACKER for plugins manager!")
 		-- Install core plugins and start packer
 		vim.cmd "packadd packer.nvim"
-		require "lua.core.plugins.init"
+		require "core.plugins.init"
 		if packer_bootstrap then
 			require('packer').sync()
 		end
@@ -32,12 +32,18 @@ M.options = {
       end,
    },
 }
+
 M.install = function(plugins)
-	local err, packer = pcall(require, "packer")
+	local a, packer = pcall(require, "packer")
+	if not a then
+		return
+	end
+
 	packer.init(M.options)
+
 	packer.startup(function(user)
-		for _, v in pairs(plugins) do
-			use(_)
+		for plugin, _ in pairs(plugins) do
+			use(plugin)
 		end
 	end)
 end

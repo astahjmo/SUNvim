@@ -4,26 +4,53 @@ local plugin = {
 	["folke/tokyonight.nvim"] = {
 		after = "nvim-lspconfig",
 		opt = true,
-		config = require ("lua.core.plugins.configs.theme")
+		config = require ("core.plugins.configs.theme")
 	},
 	["neovim/nvim-lspconfig"] = {
+		requires = {
+			'williamboman/nvim-lsp-installer'
+		},
+		config = require("core.plugins.configs.lspconfig")
 	},
-	["nvim-treesitter/nvim-treesitter"] = {
-		config = function() require "nvim-treesitter.configs".setup{}
+	["williamboman/nvim-lsp-installer"] = {
+		config = function()
+			require("nvim-lsp-installer").setup({
+				automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+				ui = {
+					icons = {
+						server_installed = "✓",
+						server_pending = "➜",
+						server_uninstalled = "✗"
+					}
+				}
+			})
 		end
 	},
-	["neovim/nvim-lspconfig"] = {
-
+	["nvim-treesitter/nvim-treesitter"] = {
+		config = function()
+			require("core.plugins.configs.nvimtreesit")
+		end
 	},
 	["kyazdani42/nvim-tree.lua"] = {
 		requires = {
 			'kyazdani42/nvim-web-devicons', -- optional, for file icons
 		},
-		cmd = "NvimTreeToggle",
-		setup = function()
+		config = function()
 			require("nvim-tree").setup()
 		end
 	},
 	["nvim-lua/plenary.nvim"] = { module = "plenary" },
+	["kyazdani42/nvim-web-devicons"] = {
+		after = "nvim-treesitter"
+
+	},
+	["nvim-lualine/lualine.nvim"] = {
+		requires = { 
+			'kyazdani42/nvim-web-devicons', opt = true
+		},
+		config = function()
+			require("lualine").setup()
+		end
+	},
 }
-require("lua.core.plugins.packer").install(plugin)
+require("core.plugins.packer").install(plugin)
