@@ -35,9 +35,7 @@ local plugin = {
 		requires = {
 			'kyazdani42/nvim-web-devicons', -- optional, for file icons
 		},
-		config = function()
-			require("nvim-tree").setup()
-		end
+		config = require("core.plugins.configs.nvimtree")
 	},
 	["nvim-lua/plenary.nvim"] = { module = "plenary" },
 	["kyazdani42/nvim-web-devicons"] = {
@@ -48,9 +46,10 @@ local plugin = {
 		requires = { 
 			'kyazdani42/nvim-web-devicons', opt = true
 		},
-		config = function()
-			require("lualine").setup()
-		end
+		config = require "lualine".setup()
 	},
+	["andweeb/presence.nvim"] = {
+		config = require("core.plugins.configs.presence")
+	}
 }
 require("core.plugins.packer").install(plugin)
