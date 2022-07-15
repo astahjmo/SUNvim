@@ -13,18 +13,7 @@ local plugin = {
 		config = require("core.plugins.configs.lspconfig")
 	},
 	["williamboman/nvim-lsp-installer"] = {
-		config = function()
-			require("nvim-lsp-installer").setup({
-				automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-				ui = {
-					icons = {
-						server_installed = "✓",
-						server_pending = "➜",
-						server_uninstalled = "✗"
-					}
-				}
-			})
-		end
+		config = require("nvim-lsp-installer").setup {}
 	},
 	["nvim-treesitter/nvim-treesitter"] = {
 		config = function()

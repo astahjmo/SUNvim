@@ -49,9 +49,13 @@ require('lspconfig')['tsserver'].setup{
     on_attach = on_attach,
     flags = lsp_flags,
 }
-require('lspconfig')['clangd'].setup{
+require'lspconfig'['clangd'].setup{
 	on_attach = on_attach,
 	flags = lsp_flags,
+}
+require'lspconfig'['sumneko_lua'].setup {
+   on_attach = on_attach,
+   flags = lsp_flags,
 }
 require('lspconfig')['rust_analyzer'].setup{
     on_attach = on_attach,

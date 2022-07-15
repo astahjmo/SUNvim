@@ -1,6 +1,5 @@
 local M = {}
 
-
 M.init = function ()
 	local fn = vim.fn
 	local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
@@ -40,7 +39,6 @@ M.install = function(plugins)
 	end
 
 	packer.init(M.options)
-
 	packer.startup(function(user)
 		for plugin, _ in pairs(plugins) do
 			use(plugin)
