@@ -16,7 +16,7 @@ local plugin = {
 		config = require 'nvim-lsp-installer'.setup()
 	},
 	["nvim-treesitter/nvim-treesitter"] = {
-		config = require("core.plugins.configs.nvimtreesit")
+		config = require("core.plugins.configs.treesitter")
 	},
 	["kyazdani42/nvim-tree.lua"] = {
 		requires = {
