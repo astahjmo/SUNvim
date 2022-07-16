@@ -53,9 +53,45 @@ require'lspconfig'['clangd'].setup{
 	on_attach = on_attach,
 	flags = lsp_flags,
 }
-require'lspconfig'['sumneko_lua'].setup {
-	on_attach = on_attach,
-	flags = lsp_flags,
+
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem = {
+   documentationFormat = { "markdown", "plaintext" },
+   snippetSupport = true,
+   preselectSupport = true,
+   insertReplaceSupport = true,
+   labelDetailsSupport = true,
+   deprecatedSupport = true,
+   commitCharactersSupport = true,
+   tagSupport = { valueSet = { 1 } },
+   resolveSupport = {
+      properties = {
+         "documentation",
+         "detail",
+         "additionalTextEdits",
+      },
+   },
+}
+
+require('lspconfig')["sumneko_lua"].setup {
+   on_attach = on_attach,
+   capabilities = capabilities,
+
+   settings = {
+      Lua = {
+         diagnostics = {
+            globals = { "vim" },
+         },
+         workspace = {
+            library = {
+               [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+               [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+            },
+            maxPreload = 100000,
+            preloadFileSize = 10000,
+         },
+      },
+   },
 }
 require('lspconfig')['rust_analyzer'].setup{
 	on_attach = on_attach,

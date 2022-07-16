@@ -13,18 +13,10 @@ local plugin = {
 		config = require("core.plugins.configs.lspconfig")
 	},
 	["williamboman/nvim-lsp-installer"] = {
-		config = function()
-			local present, lspintaller = pcall(require, 'nvim-lsp-installer')
-			if not present then
-				return
-			end
-			lspinstaller.setup()
-		end
+		config = require 'nvim-lsp-installer'.setup()
 	},
 	["nvim-treesitter/nvim-treesitter"] = {
-		config = function()
-			require("core.plugins.configs.nvimtreesit")
-		end
+		config = require("core.plugins.configs.nvimtreesit")
 	},
 	["kyazdani42/nvim-tree.lua"] = {
 		requires = {
