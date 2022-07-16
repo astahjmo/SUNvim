@@ -46,7 +46,7 @@ local plugin = {
 			if not present then
 				return
 			end
-			lualine.setup()
+			require('lualine').setup()
 		end
 	},
 	["andweeb/presence.nvim"] = {
