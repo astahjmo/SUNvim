@@ -6,8 +6,8 @@ end
 
 local theme_opts = {
    base = "base46",
-   theme = "tokyonight",
-   transparency = false,
+   theme = "tokyodark",
+   transparency = true,
 }
 
 base46.load_theme(theme_opts)
