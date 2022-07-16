@@ -13,7 +13,13 @@ local plugin = {
 		config = require("core.plugins.configs.lspconfig")
 	},
 	["williamboman/nvim-lsp-installer"] = {
-		config = require("nvim-lsp-installer").setup {}
+		config = function()
+			local present, lspintaller = pcall(require, 'nvim-lsp-installer')
+			if not present then
+				return
+			end
+			lspinstaller.setup()
+		end
 	},
 	["nvim-treesitter/nvim-treesitter"] = {
 		config = function()
@@ -35,7 +41,13 @@ local plugin = {
 		requires = { 
 			'kyazdani42/nvim-web-devicons', opt = true
 		},
-		config = require "lualine".setup()
+		config = function()
+			local present, lualine = pcall(require, 'lualine')
+			if not present then
+				return
+			end
+			lualine.setup()
+		end
 	},
 	["andweeb/presence.nvim"] = {
 		config = require("core.plugins.configs.presence")

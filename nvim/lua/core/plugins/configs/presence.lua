@@ -1,5 +1,9 @@
 local present, presence = pcall(require, "presence")
 
+if not present then
+	return
+end
+
 presence:setup({
     -- General options
     auto_update         = true,                       -- Update activity based on autocmd events (if `false`, map or manually execute `:lua package.loaded.presence:update()`)
