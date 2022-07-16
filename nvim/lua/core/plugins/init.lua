@@ -4,7 +4,7 @@ local plugin = {
 	["folke/tokyonight.nvim"] = {
 		after = "nvim-lspconfig",
 		opt = true,
-		config = require ("core.plugins.configs.theme")
+		config = require("core.plugins.configs.theme")
 	},
 	["neovim/nvim-lspconfig"] = {
 		requires = {
@@ -38,19 +38,13 @@ local plugin = {
 
 	},
 	["nvim-lualine/lualine.nvim"] = {
-		requires = { 
-			'kyazdani42/nvim-web-devicons', opt = true
-		},
-		config = function()
-			local present, lualine = pcall(require, 'lualine')
-			if not present then
-				return
-			end
-			require('lualine').setup()
-		end
+		config = require('lualine').setup()
 	},
 	["andweeb/presence.nvim"] = {
 		config = require("core.plugins.configs.presence")
+	},
+	["jayden-chan/base46.nvim"] = {
+		config = require("core.plugins.configs.base46")
 	}
 }
 require("core.plugins.packer").install(plugin)

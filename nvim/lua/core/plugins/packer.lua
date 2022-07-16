@@ -9,7 +9,7 @@ M.init = function ()
 		print("Starting core PACKER for plugins manager!")
 		-- Install core plugins and start packer
 		vim.cmd "packadd packer.nvim"
-		require "core.plugins.init"
+		require "core.plugins"
 		if packer_bootstrap then
 			require('packer').sync()
 		end

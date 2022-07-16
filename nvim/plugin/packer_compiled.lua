@@ -69,6 +69,11 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
+  ["base46.nvim"] = {
+    loaded = true,
+    path = "/home/astaroth/.local/share/nvim/site/pack/packer/start/base46.nvim",
+    url = "https://github.com/jayden-chan/base46.nvim"
+  },
   ["lualine.nvim"] = {
     loaded = true,
     path = "/home/astaroth/.local/share/nvim/site/pack/packer/start/lualine.nvim",
